@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Time Counter</title>
+        <script defer>
+            "use strict";
+            let func = () => {
+                let curruntTime = new Date(new Date().getTime()).toLocaleTimeString();
+                let startTime = document.getElementById("startTime").value;
+                //let startDate = document.getElementById("startDate").value;
+
+                // let arrDate = startDate.split("-");
+                // let year = arrDate[0];
+                // let month = arrDate[1];
+                // let day = arrDate[2];
+
+                let arrTime = startTime.split(":");
+                let hour = arrTime[0];
+                let min = arrTime[1];
+                
+                let curTime = curruntTime.split(":");
+                let hour1 = curTime[0];
+                let min1 = curTime[1];
+                
+                let interval = intervals();
+                let hour2 = interval[0];
+                let min2 = interval[1];
+
+                // let start = new Date(year, month-1, day, hour, min);
+
+                // let diff = Math.abs(curruntTime - start)
+                // let time = new Date(diff*1000);
+                let diffHour = Math.abs(hour1-hour-hour2);
+                let diffMin = Math.abs(min1-min-min2);
+
+                document.getElementById("text").innerHTML = "it has been " + diffHour + " Hour and "+ diffMin +" minits"; 
+            }
+            let add = () => {
+                let interval = document.createElement("p");
+                interval.innerHTML = "Enter new Interval : ";
+                let input = document.createElement("input");
+                input.type = "time";
+                input.className = "interval";
+                input.value = "00:00";
+                let intervals = document.querySelector(".intervals");
+                interval.appendChild(input);
+                intervals.appendChild(interval)
+                
+            }
+            let intervals = () => {
+                let input = [...document.querySelectorAll(".interval")];
+                let hourSum = 0;
+                let minSum = 0;
+                for(let i=0;i<input.length;i++){
+                    let split = input[i].value.split(":")
+                    hourSum += parseInt(split[0]);
+                    minSum += parseInt(split[1]);
+                }
+                hourSum += Math.floor(minSum/60);
+                let min = minSum%60;
+                return [hourSum, min];
+            }
+        </script>
+    </head>
+    <body id="body">
+        <!--
+        <label for="startDate">Enter date : </label><input type="date" id="startDate" placeholder="Enter date"><br /><br />
+        -->
+        <label for="startTime">Enter Start Time : </label><input type="time" id="startTime" value="00:00" placeholder="Enter Start Time"><br /><br />
+        <div class="intervals">
+            <p>Enter interval : <input type="time" class="interval" value="00:00" ></p>
+        </div><br /><br />
+        <button onclick="add()">Add</button><br /><br />
+        <button type="submit" onclick="func()">Submit</button>
+        <p id="text"></p>
+    </body>
+</html>
