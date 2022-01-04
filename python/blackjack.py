@@ -37,11 +37,12 @@ def display(player_score,player_cards,dealer_cards,dealer_score,result=False):
   if not result:
     if dealer_score != 0 and player_score != 0:
       clear()
-      print("Dealer Score : " + str(dealer_score - dealer_cards[len(dealer_cards)-1].value))
+      print("Dealer Score : " + str(dealer_score - dealer_cards[0].value))
       print("dealer_Cards : ")
-      for i in range(len(dealer_cards)-1):
+      print('\t 1 Card Hidden')
+      for i in range(1,len(dealer_cards)):
         print("\t" + str(dealer_cards[i]) + " : " + str(dealer_cards[i].value))
-      
+
       print("\nPlayer_Cards : ")
       for i in range(len(player_cards)):
         print("\t" + str(player_cards[i]) + " : " + str(player_cards[i].value))
@@ -76,6 +77,10 @@ def who_won(player_score,player_cards, dealer_cards, dealer_score, deck):
     if player_score > 21:
       display(player_score,player_cards,dealer_cards,dealer_score,True)
       print('\nBUST!!!')
+      quit()
+    elif player_score > 21:
+      display(player_score,player_cards,dealer_cards,dealer_score,True)
+      print('\nDealer BUST!!!')
       quit()
     elif player_score == 21 and dealer_score >= 17:
       display(player_score,player_cards,dealer_cards,dealer_score,True)
