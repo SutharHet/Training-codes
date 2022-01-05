@@ -1,13 +1,14 @@
-import math
+# Tax Calculator - Asks the user to enter a cost and either a country or state tax. It then returns the tax plus the total cost with tax.
 
-def e_with_precision(n):
-  return '%.*f' % (n, math.e)
+def country_tax(cost,tax):
+  tax = tax/100
+  return cost*tax
 
-if __name__ == '__main__':
-  correct_input = False
-  while True:
-      print('Precision must be between 1 and 20')
-      precision = int(input('Number of decimal places: '))
-      if precision > 0 and precision < 20:
-        print(e_with_precision(precision))
-        break
+def total_cost(cost,tax):
+  tax = country_tax(cost,tax)
+  cost = cost + tax
+  print('Total cost is '+str(cost)+'$ including tax '+str(tax)+'$')
+
+cost = int(input('Enter cost : '))
+tax = int(input('Enter country or state cost in % : '))
+total_cost(cost,tax)
