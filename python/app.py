@@ -1,38 +1,41 @@
-def through_recusion(num):
-  if num == 0:
-    return 1
-  return num*through_recusion(num-1)
-
-def through_loop(num):
-  ans = 1
-  for n in range(1,num+1):
-    ans *= n
-  return ans
-
-def choice(num):
-  ans = 0
-  while True:
-    try:
-      user_choice = int(input('choose\n\t1.Through Recursion\t2.Through Loop : '))
-      if user_choice in [1,2]:
-        if user_choice == 1:
-          ans = through_recusion(num)
-          break
-        else:
-          ans = through_loop(num)
-          break
-      else:
-        print('Invalid NUmber')
-    except:
-      print('Invalid Input! Enter a Number')
+class Inventory:
+  def __init__(self):
+    pass
+  products = []
+  def list_inventory(self):
+    print()
+    print('Product name : quantity')
+    for product in self.products:
+      print(product['name'] + " : "+ str(product['quantity']))
   
-  print('Factorial of {} is {}'.format(num,ans))
+  def add_product(self,product_dict):
+    self.products.append(product_dict)
+
+  def total_products(self):
+    total = 0
+    for product in self.products:
+      total +=  product['quantity']
+    print('Total number of product is : ' + str(total))
+
+inventory = Inventory()
 
 
-while True:
-  try:
-    num = int(input('Enter num for factorial : '))
-    choice(num)
-    break
-  except:
-    print('Invlid Input')
+class Product():
+  def __init__(self,name,price,id,quantity):
+    self.name = name
+    self.price = price
+    self.id = id
+    self.quantity = quantity
+    inventory.add_product({'name' : self.name,'id': self.id, 'price': self.price, 'quantity' : self.quantity})
+  
+  def __str__(self):
+    return 'Product id ' + str(self.id) + ' has ' + str(self.price) + '$ price and ' +str(self.quantity)+ ' are left.'
+  
+  def print_product_dict(self):
+    print({'name' : self.name,'id': self.id, 'price': self.price, 'quantity' : self.quantity})
+
+food = Product('Food',100,1,10)
+drinks = Product('Drinks',20,2,20)
+
+inventory.list_inventory()
+inventory.total_products()
